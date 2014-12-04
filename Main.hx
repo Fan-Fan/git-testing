@@ -15,6 +15,7 @@ import openfl.display.FPS;
 
 import com.mint.C_Xbox;
 import com.mint.M_Marionette;
+import com.mint.C_Keyboard;
 
 class Main extends Sprite
 {
