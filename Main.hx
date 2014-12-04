@@ -24,6 +24,7 @@ class Main extends Sprite
 	private var i:Int;
 	private var u:Bool;
 	private var x:C_Keyboard;
+	private var git:String;
 
 	public function new ()
 	{
