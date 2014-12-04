@@ -9,23 +9,22 @@ import flash.display.Bitmap;
 import flash.display.MovieClip;
 import flash.Lib;
 import flash.display.StageScaleMode;
-//import openfl.Assets;
+import openfl.Assets;
 import openfl.display.FPS;
 
-
+#if !flash
 import com.mint.C_Xbox;
-import com.mint.M_Marionette;
 import com.mint.C_Keyboard;
+#end
+
+import com.mint.M_Marionette;
 
 class Main extends Sprite
 {
 	private var speed:Float = 4.0;
 	private var Box:Sprite;
 	private var i:Int;
-	private var u:Bool;
-	private var x:C_Keyboard;
-	private var git:String;
-	private var git2:String;
+	private var chara:MovieClip;
 
 	public function new ()
 	{
@@ -44,24 +43,20 @@ class Main extends Sprite
 		
 
 		#if flash
-			var chara:MovieClip = flash.Lib.attach("CH01");
+			chara = flash.Lib.attach("CH01");
 			chara.x = 350;
 			chara.y = 350;
 			this.addChild(chara);
 		#else
 
-			//for(i in 0...30)
-			//{
-				//var chara = Assets.getMovieClip ("Graph:CH01");
-				//chara.x = 200;
-				//chara.y = 200;
-				//this.addChild(chara);
-			//}
-		#end
+			chara = Assets.getMovieClip ("Graph:CH01");
+			chara.x = 200;
+			chara.y = 200;
+			this.addChild(chara);
 
-		
-		var control:C_Xbox = new C_Xbox(0.05, this);
-		M_Marionette.bindXbox(control);
+			var control:C_Xbox = new C_Xbox(0.05, this);
+			M_Marionette.bindXbox(control);
+		#end
 		
 
 		var g:BitmapData = new BitmapData(50,50,false,0x0000FF);
@@ -85,7 +80,13 @@ class Main extends Sprite
 
 	function gameUpdate(e:Event)
 	{
-		
+		trace("current frame:"+chara.currentFrame);
+		if(chara.currentFrame > 100)
+		{
+			chara.gotoAndPlay(1);
+		}
+
+		#if !flash			//Non-flash only joystick support
 		Box.x += M_Marionette.jx.analogLX*speed;
 		Box.y += M_Marionette.jx.analogLY*speed;
 
@@ -96,5 +97,6 @@ class Main extends Sprite
 		{
 			trace("OK!");
 		}
+		#end
 	}
 }
