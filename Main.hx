@@ -23,6 +23,7 @@ class Main extends Sprite
 	private var Box:Sprite;
 	private var i:Int;
 	private var u:Bool;
+	private var x:C_Keyboard;
 
 	public function new ()
 	{
