@@ -22,6 +22,7 @@ class Main extends Sprite
 	private var speed:Float = 4.0;
 	private var Box:Sprite;
 	private var i:Int;
+	private var u:Bool;
 
 	public function new ()
 	{
